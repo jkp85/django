@@ -2,6 +2,8 @@ import copy
 import inspect
 from bisect import bisect
 from collections import OrderedDict, defaultdict
+from importlib import import_module
+from itertools import chain
 
 from django.apps import apps
 from django.conf import settings
@@ -240,7 +242,10 @@ class Options:
                         'Add parent_link=True to %s.' % field,
                     )
             else:
-                auto = AutoField(verbose_name='ID', primary_key=True, auto_created=True)
+                module_name, cls_name = settings.PRIMARY_KEY_FIELD[0].rsplit('.', 1)
+                module = import_module(module_name)
+                cls = getattr(module, cls_name)
+                auto = cls(**settings.PRIMARY_KEY_FIELD[1])
                 model.add_to_class('id', auto)
 
     def add_manager(self, manager):

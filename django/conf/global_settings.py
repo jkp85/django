@@ -182,6 +182,9 @@ DATABASES = {}
 # Classes used to implement DB routing behavior.
 DATABASE_ROUTERS = []
 
+# Default model pk field
+PRIMARY_KEY_FIELD = ('django.db.models.AutoField', dict(verbose_name='ID', primary_key=True, auto_created=True))
+
 # The email backend to use. For possible shortcuts see django.core.mail.
 # The default is to use the SMTP backend.
 # Third-party backends can be specified by providing a Python path
