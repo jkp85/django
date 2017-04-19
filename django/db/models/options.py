@@ -15,6 +15,7 @@ from django.db.models.fields.proxy import OrderWrt
 from django.db.models.query_utils import PathInfo
 from django.utils.datastructures import ImmutableList, OrderedSet
 from django.utils.functional import cached_property
+from django.utils.module_loading import import_string
 from django.utils.text import camel_case_to_spaces, format_lazy
 from django.utils.translation import override
 
@@ -242,9 +243,7 @@ class Options:
                         'Add parent_link=True to %s.' % field,
                     )
             else:
-                module_name, cls_name = settings.PRIMARY_KEY_FIELD[0].rsplit('.', 1)
-                module = import_module(module_name)
-                cls = getattr(module, cls_name)
+                cls = import_string(settings.PRIMARY_KEY_FIELD[0])
                 auto = cls(**settings.PRIMARY_KEY_FIELD[1])
                 model.add_to_class('id', auto)
 
