@@ -255,7 +255,7 @@ class AdminSite:
             ),
             path('jsi18n/', wrap(self.i18n_javascript, cacheable=True), name='jsi18n'),
             path(
-                'r/<int:content_type_id>/<path:object_id>/',
+                'r/<uuid:content_type_id>/<path:object_id>/',
                 wrap(contenttype_views.shortcut),
                 name='view_on_site',
             ),
