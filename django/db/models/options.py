@@ -2,8 +2,6 @@ import copy
 import inspect
 from bisect import bisect
 from collections import OrderedDict, defaultdict
-from importlib import import_module
-from itertools import chain
 
 from django.apps import apps
 from django.conf import settings
