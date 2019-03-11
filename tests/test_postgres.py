@@ -12,6 +12,8 @@
 # database backends as possible.  You may want to create a separate settings
 # file for each of the backends you test against.
 
+import uuid
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -35,3 +37,5 @@ SECRET_KEY = "django_tests_secret_key"
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.MD5PasswordHasher',
 ]
+
+PRIMARY_KEY_FIELD = ('django.db.models.UUIDField', dict(primary_key=True, default=uuid.uuid4, editable=False))
